@@ -1,6 +1,12 @@
-# curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-# yum install nodejs -y
-# useradd roboshop
+Log_File=/tmp/catalogue
+
+echo "Install NodeJs"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$Log_File
+
+echo "Install N"
+yum install nodejs -y
+
+  useradd roboshop
 $ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
 $ cd /home/roboshop
 $ unzip /tmp/catalogue.zip
