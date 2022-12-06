@@ -10,6 +10,7 @@ echo Status=$?
 
  echo "Update the Listen Address"
  sed -i -e '/s/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$Log_File
+echo status=$?
 
  echo "Starting Mongodb "
  systemctl enable mongod &>>$Log_File
