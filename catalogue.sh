@@ -7,7 +7,7 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
-
+exit 1
 fi
 
 echo "Installing Nodejs "
@@ -16,6 +16,7 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
 
 echo "Add Roboshop Username"
@@ -24,13 +25,16 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
+
 echo "Download the schema"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$Log_File
 if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
 
 cd /home/roboshop
@@ -43,6 +47,7 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
 
 echo "Install the NodeJs Dependencies"
@@ -51,6 +56,7 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
 
 echo "Setup the Catalogue Service"
@@ -59,6 +65,7 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
 
 systemctl daemon-reload &>>$Log_File
@@ -70,4 +77,5 @@ if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
+  exit 1
 fi
