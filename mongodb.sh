@@ -1,6 +1,6 @@
 Log_File=/tmp/mongo
 
-source=common.sh
+source common.sh
 
 
 echo "Setup Mongodb Repo"
