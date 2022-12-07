@@ -63,14 +63,17 @@ rm -rf catalogue &>>$Log_File
 
 echo "Extract the Catalogue"
 unzip /tmp/catalogue.zip &>>$Log_File
-mv catalogue-main catalogue &>>$Log_File
-cd /home/roboshop/catalogue &>>$Log_File
+
 if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
   exit 1
 fi
+
+mv catalogue-main catalogue &>>$Log_File
+cd /home/roboshop/catalogue &>>$Log_File
+
 
 echo "Install the NodeJs Dependencies"
 npm install &>>$Log_File
