@@ -39,7 +39,7 @@ fi
 
 
 
-echo "Download the schema"
+echo "Download the  Catalogue schema"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$Log_File
 if [ $? -eq 0 ];then
   echo status=SUCESS
@@ -51,7 +51,7 @@ fi
 cd /home/roboshop
 
 
-echo "Removing the old webcontent"
+echo "Removing the old content"
 rm -rf catalogue &>>$Log_File
  if [ $? -eq 0 ];then
    echo status=SUCESS
@@ -61,7 +61,7 @@ rm -rf catalogue &>>$Log_File
  fi
 
 
-echo "Extract the Schema"
+echo "Extract the Catalogue"
 unzip /tmp/catalogue.zip &>>$Log_File
 mv catalogue-main catalogue &>>$Log_File
 cd /home/roboshop/catalogue &>>$Log_File
