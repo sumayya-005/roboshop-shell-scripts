@@ -24,14 +24,20 @@ else
   exit 1
 fi
 
-echo "Add Roboshop Username"
-useradd roboshop &>>$Log_File
+id roboshop &>>$Log_File
+if [ $? -ne 0 ]; then
+  echo "Add Roboshop Username"
+  useradd roboshop &>>$Log_File
 if [ $? -eq 0 ];then
   echo status=SUCESS
 else
   echo status=FAILURE
   exit 1
 fi
+fi
+
+
+
 
 echo "Download the schema"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$Log_File
@@ -64,6 +70,15 @@ else
   exit 1
 fi
 
+echo Removing the old webcontent
+rm -rf * &>>$Log_File
+ if [ $? -eq 0 ];then
+   echo status=SUCESS
+ else
+   echo status=FAILURE
+   exit 1
+ fi
+ 
 echo "Setup the Catalogue Service"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$Log_File
 if [ $? -eq 0 ];then
