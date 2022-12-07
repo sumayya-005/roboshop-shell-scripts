@@ -99,7 +99,7 @@ systemctl daemon-reload &>>$Log_File
 systemctl enable catalogue &>>$Log_File
 
 echo "Start the Service"
-systemctl start catalogue &>>$Log_File
+system ctl start catalogue &>>$Log_File
 if [ $? -eq 0 ];then
   echo status=SUCESS
 else
