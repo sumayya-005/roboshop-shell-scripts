@@ -52,7 +52,7 @@ cd /home/roboshop
 
 
 echo "Removing the old webcontent"
-rm -rf * &>>$Log_File
+rm -rf catalogue &>>$Log_File
  if [ $? -eq 0 ];then
    echo status=SUCESS
  else
@@ -60,7 +60,7 @@ rm -rf * &>>$Log_File
    exit 1
  fi
 
- 
+
 echo "Extract the Schema"
 unzip /tmp/catalogue.zip &>>$Log_File
 mv catalogue-main catalogue &>>$Log_File
