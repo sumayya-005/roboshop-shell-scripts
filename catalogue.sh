@@ -50,6 +50,17 @@ fi
 
 cd /home/roboshop
 
+
+echo "Removing the old webcontent"
+rm -rf * &>>$Log_File
+ if [ $? -eq 0 ];then
+   echo status=SUCESS
+ else
+   echo status=FAILURE
+   exit 1
+ fi
+
+ 
 echo "Extract the Schema"
 unzip /tmp/catalogue.zip &>>$Log_File
 mv catalogue-main catalogue &>>$Log_File
@@ -70,15 +81,8 @@ else
   exit 1
 fi
 
-echo Removing the old webcontent
-rm -rf * &>>$Log_File
- if [ $? -eq 0 ];then
-   echo status=SUCESS
- else
-   echo status=FAILURE
-   exit 1
- fi
- 
+
+
 echo "Setup the Catalogue Service"
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$Log_File
 if [ $? -eq 0 ];then
