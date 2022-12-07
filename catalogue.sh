@@ -9,9 +9,9 @@ fi
 echo "Setup Catalogue NodeJs"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$Log_File
 if [ $? -eq 0 ];then
-  echo status=SUCESS
+  echo -e status="\e[32mSUCCESS\e[0m"
 else
-  echo status=FAILURE
+  echo -e status="\e[35mFAILURE\e[0m"
 exit 1
 fi
 
