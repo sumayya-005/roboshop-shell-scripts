@@ -12,11 +12,11 @@ StatusCheck $?
 StatusCheck $?
 
  echo "Update the Listen Address"
- sed -i -e '/s/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$Log_File
+ sed -i -e '/s/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 StatusCheck $?
 
 
- echo "Starting Mongodb "
+ echo "Starting Mongodb"
  systemctl enable mongod &>>$Log_File
  systemctl restart mongod &>>$Log_File
 StatusCheck $?
@@ -29,9 +29,11 @@ StatusCheck $?
  cd /tmp &>>$Log_File
 
  echo "Extract the files"
- unzip mongodb.zip &>>$Log_File
- cd mongodb-main &>>$Log_File
+ unzip -o mongodb.zip &>>$Log_File
+
  StatusCheck $?
+
+ cd mongodb-main
 
  echo "Load the Catalogue schema"
  mongo < catalogue.js &>>$Log_File
