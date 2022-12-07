@@ -1,21 +1,40 @@
 Log_File=/tmp/catalogue
 
-echo "Install NodeJs"
+echo "Setup Catalogue NodeJs"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$Log_File
+echo status=$?
 
-echo "Install N"
-yum install nodejs -y
+echo "Installing Nodejs "
+yum install nodejs -y &>>$Log_File
+echo status=$?
 
-  useradd roboshop
-$ curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
-$ cd /home/roboshop
-$ unzip /tmp/catalogue.zip
-$ mv catalogue-main catalogue
-$ cd /home/roboshop/catalogue
-$ npm install
+echo "Add Roboshop Username"
+useradd roboshop &>>$Log_File
+echo status=$?
 
+echo "Download the schema"
+curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$Log_File
+echo status=$?
 
-# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-# systemctl daemon-reload
-# systemctl start catalogue
-# systemctl enable catalogue
+cd /home/roboshop
+
+echo "Extract the Schema"
+unzip /tmp/catalogue.zip &>>$Log_File
+mv catalogue-main catalogue &>>$Log_File
+cd /home/roboshop/catalogue &>>$Log_File
+echo status=$?
+
+echo "Install the NodeJs Dependencies"
+npm install &>>$Log_File
+echo status=$?
+
+echo "Setup the Catalogue Service"
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$Log_File
+echo status=$?
+
+systemctl daemon-reload &>>$Log_File
+systemctl enable catalogue &>>$Log_File
+
+echo "Start the Service"
+systemctl start catalogue &>>$Log_File
+echo status=$?
