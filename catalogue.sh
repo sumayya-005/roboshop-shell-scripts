@@ -99,10 +99,10 @@ systemctl daemon-reload &>>$Log_File
 systemctl enable catalogue &>>$Log_File
 
 echo "Start the Service"
-system ctl start catalogue &>>$Log_File
+systemctl start catalogue >>$Log_File
 if [ $? -eq 0 ];then
-  echo status=SUCESS
+  echo -e status="\e[32mSUCCESS\e[0m"
 else
-  echo status=FAILURE
-  exit 1
+  echo -e status="\e[35mFAILURE\e[0m"
+exit 1
 fi
