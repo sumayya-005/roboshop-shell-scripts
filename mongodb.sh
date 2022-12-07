@@ -11,8 +11,8 @@ StatusCheck $?
  yum install -y mongodb-org &>>$Log_File
 StatusCheck $?
 
- echo "Update the Listen Address"
- sed -i -e '/s/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+echo "Update MongoDB Listen Address"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 StatusCheck $?
 
 
