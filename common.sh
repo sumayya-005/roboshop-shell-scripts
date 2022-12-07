@@ -4,7 +4,7 @@ if [ $ID -ne 0 ]; then
   exit
 fi
 
-StatusCheck () {
+StatusCheck() {
  if [ $1 -eq 0 ];then
    echo -e status="\e[32mSUCCESS\e[0m"
  else
