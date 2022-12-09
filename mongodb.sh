@@ -1,45 +1,35 @@
-Log_File=/tmp/mongo
+LOG_FILE=/tmp/mongodb
 
 source common.sh
 
-
-echo "Setup Mongodb Repo"
-curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$Log_File
+echo "Setting MongoDB Repo"
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG_FILE
 StatusCheck $?
 
- echo "Installing Mongodb"
- yum install -y mongodb-org &>>$Log_File
+echo "Installing MongoDB Server"
+yum install -y mongodb-org &>>$LOG_FILE
 StatusCheck $?
 
 echo "Update MongoDB Listen Address"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 StatusCheck $?
 
-
- echo "Starting Mongodb"
- systemctl enable mongod &>>$Log_File
- systemctl restart mongod &>>$Log_File
+echo "Starting MongoDB Service"
+systemctl enable mongod &>>$LOG_FILE && systemctl restart mongod &>>$LOG_FILE
 StatusCheck $?
 
-echo "Download the Mongodb Schema files"
- curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$Log_File
+echo "Downloading MongoDb Schema"
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
 StatusCheck $?
 
-
- cd /tmp &>>$Log_File
-
- echo "Extract the files"
- unzip -o mongodb.zip &>>$Log_File
-
- StatusCheck $?
-
- cd mongodb-main
-
- echo "Load the Catalogue schema"
- mongo < catalogue.js &>>$Log_File
+cd /tmp
+echo "Extract Schema File"
+unzip -o mongodb.zip &>>$LOG_FILE
 StatusCheck $?
 
- echo "Load the User schema"
- mongo < users.js &>>$Log_File
-StatusCheck $?
+cd mongodb-main
 
+echo "Load Schema"
+for schema in catalogue.js users.js ; do
+  mongo < ${schema} &>>$LOG_FILE
+done
