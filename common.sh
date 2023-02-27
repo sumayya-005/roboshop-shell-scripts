@@ -128,8 +128,6 @@ GOLANG() {
 
   go build &>>${LOG_FILE}
 
-#  echo "Update the Passwords in Service File"
-#  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}" ${script_location}/files/${component}.service
 
   SYSTEMD_SETUP
 
