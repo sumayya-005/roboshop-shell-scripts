@@ -124,6 +124,7 @@ GOLANG() {
       useradd roboshop &>>${LOG_FILE}
       StatusCheck $?
     fi
+  StatusCheck $?
 
   echo "Download app content"
   curl -L -s -o /tmp/dispatch.zip https://github.com/roboshop-devops-project/dispatch/archive/refs/heads/main.zip &>>${LOG_FILE}
@@ -132,6 +133,7 @@ GOLANG() {
 
   echo "Unzip the dispatch"
   unzip /tmp/dispatch.zip &>>${LOG_FILE}
+  StatusCheck $?
 
   echo "Download Dependencies"
   cd dispatch &>>${LOG_FILE}
@@ -141,7 +143,7 @@ GOLANG() {
   go get &>>${LOG_FILE}
 
   go build &>>${LOG_FILE}
-
+  StatusCheck $?
 
   SYSTEMD_SETUP
 
