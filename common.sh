@@ -131,7 +131,7 @@ GOLANG() {
 
 
   echo "Unzip the dispatch"
-  
+  unzip /tmp/dispatch.zip &>>${LOG_FILE}
 
   echo "Download Dependencies"
   cd dispatch &>>${LOG_FILE}
