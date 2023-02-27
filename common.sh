@@ -117,9 +117,23 @@ GOLANG() {
   yum install golang -y &>>${LOG_FILE}
   StatusCheck $?
 
-  APP_PREREQ
+  echo "Adding User Roboshop"
+  id roboshop &>>${LOG_FILE}
+    if [ $? -ne 0 ]; then
+      echo "Add RoboShop Application User"
+      useradd roboshop &>>${LOG_FILE}
+      StatusCheck $?
+    fi
 
-  echo "Download Depencies"
+  echo "Download app content"
+  curl -L -s -o /tmp/dispatch.zip https://github.com/roboshop-devops-project/dispatch/archive/refs/heads/main.zip &>>${LOG_FILE}
+  StatusCheck $?
+
+
+  echo "Unzip the dispatch"
+  
+
+  echo "Download Dependencies"
   cd dispatch &>>${LOG_FILE}
 
   go mod init dispatch &>>${LOG_FILE}
